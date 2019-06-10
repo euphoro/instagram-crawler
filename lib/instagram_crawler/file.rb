@@ -11,10 +11,13 @@ module InstagramCrawler
         return unless Config.download
         binary_data, mime_type = get_binary_data(url)
 
+        puts mime_type
+
         extname =
-          case mime_type
-          when "video/mp4" then ".mp4"
-          when "image/jpeg" then ".jpeg"
+          case dir_name
+          when "video" then ".mp4"
+          else
+            ".jpeg"
           end
 
         dir_path  = "#{Config.base_path}/#{dir_name}"
