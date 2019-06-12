@@ -8,7 +8,7 @@ module InstagramCrawler
       end
 
       def download(url, dir_name, file_name)
-        return unless Config.download
+        # return unless Config.download
         binary_data, mime_type = get_binary_data(url)
 
         puts mime_type
@@ -16,6 +16,7 @@ module InstagramCrawler
         extname =
           case dir_name
           when "video" then ".mp4"
+          when "story" then ".mp4"
           else
             ".jpeg"
           end

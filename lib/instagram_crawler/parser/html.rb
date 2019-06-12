@@ -4,7 +4,23 @@ module InstagramCrawler
       attr_reader :html
 
       def initialize(url)
+        puts 'querying: ' + url
         @html = get_html(url)
+      end
+
+      def parsing_stories
+        doc       = Nokogiri::HTML(html)
+        js_data   = doc.at_xpath("//script[contains(text(),'window._sharedData')]")
+        json      = JSON.parse(js_data.text[21..-2])
+        profile   = json["entry_data"]["StoriesPage"][0]
+        user_id = profile["user"]["id"]
+        puts '.............', user_id
+        Parser::StoriesJson.new(user_id).parsing
+        # edges     = profile["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"]
+
+        # loop_edges(edges)
+
+        # return page_info, user_id
       end
 
       def parsing

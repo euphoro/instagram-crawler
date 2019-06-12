@@ -5,8 +5,16 @@ module InstagramCrawler
       Logger.info "Running instagram-crawler v#{InstagramCrawler::VERSION}\n"
       start_time = Time.now
       File.mkdir
-      page_info, user_id = Parser::Html.new(Config.base_url).parsing
-      Parser::Json.new(page_info, user_id).parsing if page_info["has_next_page"]
+
+      if Config.with_stories then
+        # download stories
+        page_info, user_id = Parser::Html.new(Config.story_url).parsing_stories
+      else
+        # download others
+        page_info, user_id = Parser::Html.new(Config.base_url).parsing
+        Parser::Json.new(page_info, user_id).parsing if page_info["has_next_page"]
+      end
+
       end_time = Time.now
       Logger.info "\nSuccess, all files have been downloaded!".light_green
     end

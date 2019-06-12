@@ -19,6 +19,7 @@ require "instagram_crawler/parser/args"
 require "instagram_crawler/parser/base"
 require "instagram_crawler/parser/html"
 require "instagram_crawler/parser/json"
+require "instagram_crawler/parser/stories_json"
 
 # error
 require "instagram_crawler/errors/http_error"

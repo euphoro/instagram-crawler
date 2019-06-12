@@ -6,6 +6,7 @@ module InstagramCrawler
       def initialize(args)
         @args = args
         parse_args
+        puts '...................', @args
         validates_required_args
       end
 
@@ -17,6 +18,7 @@ module InstagramCrawler
         opts.separator ''
         opts.separator 'options:'
         opts.on('-u', '--username USERNAME', 'Instagram username') { |user_name| Config.user_name = user_name }
+        opts.on('-s', '--with stories', 'Download stories') { |with_stories| Config.with_stories = true }
         opts.on('-d', '--download', 'Download files') { |download| Config.download = true }
         opts.on('-a', '--after DATE', 'Download files after this date (YYYYMMDD)') { |after_date| Config.after_date = after_date }
         opts.on('-b', '--before DATE', 'Download files before this date (YYYYMMDD)') { |before_date| Config.before_date = before_date }
