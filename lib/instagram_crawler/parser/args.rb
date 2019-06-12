@@ -6,7 +6,6 @@ module InstagramCrawler
       def initialize(args)
         @args = args
         parse_args
-        puts '...................', @args
         validates_required_args
       end
 

@@ -9,7 +9,6 @@ module InstagramCrawler
 
       def parsing
         url           = stories_src_url(user_id)
-        puts url
         html          = get_json(url)
         json          = JSON.parse(html)
         items         = json["data"]["reels_media"][0]["items"]
@@ -20,8 +19,6 @@ module InstagramCrawler
             src: item["video_resources"][1]["src"]
           )
         }
-
-        puts @stories_srcs
 
         download_stories()
       end
