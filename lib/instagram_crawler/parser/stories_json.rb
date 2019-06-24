@@ -13,10 +13,12 @@ module InstagramCrawler
         json          = JSON.parse(html)
         items         = json["data"]["reels_media"][0]["items"]
         @stories_srcs = items.map {
-          |item| OpenStruct.new(
+          |item|
+          # puts item
+          OpenStruct.new(
             story_id: item["id"],
             taken_at_timestamp: item["taken_at_timestamp"],
-            src: item["video_resources"][1]["src"]
+            src: item.key?("video_resources") ? item["video_resources"][1]["src"] : item["display_resources"].last["src"]
           )
         }
 
