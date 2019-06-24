@@ -14,11 +14,11 @@ module InstagramCrawler
         puts mime_type
 
         extname =
-          case dir_name
-          when "video" then ".mp4"
-          when "story" then ".mp4"
+          case mime_type
+          when "video/mp4" then ".mp4"
+          when "image/jpeg" then ".jpeg"
           else
-            ".jpeg"
+            ".mp4"
           end
 
         dir_path  = "#{Config.base_path}/#{dir_name}"
